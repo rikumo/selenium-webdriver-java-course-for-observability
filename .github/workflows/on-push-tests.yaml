@@ -1,0 +1,17 @@
+# workflow name
+# trigger
+# jobs
+# actions / steps
+
+name: on_push
+
+on:
+  push:
+    branch:
+    - "**"  # run on all branches
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
