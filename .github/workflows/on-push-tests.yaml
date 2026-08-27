@@ -1,6 +1,8 @@
+# WORKFLOW FILE GENERIC STRUCTURE:
+# --------------------------------
 # workflow name
 # trigger
-# jobs
+# jobs (each job starts with any required setup for that job)
 # actions / steps
 
 name: on_push
@@ -12,6 +14,17 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest\
+    env:
+      RUNNER_OS: true
+      HEADLESS: true
+
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 16
+      - name: Run selenium tests with maven
+        working-directory: webdriver_java
+        run: mvn test

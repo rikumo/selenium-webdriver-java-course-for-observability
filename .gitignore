@@ -1,6 +1,7 @@
 # IntelliJ files and folders
 .idea/
 *.iml
+*.DS_Store
 
 # Maven build artifacts
 webdriver_java/target
