@@ -20,6 +20,9 @@ jobs:
       HEADLESS_CHROME: true
 
     steps:
+      # Capture build start time on linux
+      - name: Record start time
+        run: echo START_TIME=$(date +%s) >> $GITHUB_ENV
       - uses: actions/checkout@v2
 
       - uses: actions/setup-java@v2
@@ -37,3 +40,9 @@ jobs:
       - name: Run selenium tests with maven
         working-directory: webdriver_java
         run: mvn test
+
+      # Capture end timestamp regardless of test result. And compute test duration
+      - name: Record test end time
+        if: always()
+        run: expr $(date +%s) - ${START_TIME}
+
