@@ -2,8 +2,9 @@
 # --------------------------------
 # workflow name
 # trigger
+# steps ( the individual actions / steps
 # jobs (each job starts with any required setup for that job)
-# actions / steps
+# steps ( the individual actions that make up the job. Custom steps are started with a name.)
 
 name: on_push
 
