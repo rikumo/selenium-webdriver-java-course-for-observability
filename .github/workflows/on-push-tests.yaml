@@ -11,7 +11,7 @@ name: on_push
 on:
   push:
     branch:
-    - "**"  # run on all branches
+      - "**"  # run on all branches
 
 jobs:
   build_and_test:
