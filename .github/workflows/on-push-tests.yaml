@@ -38,6 +38,13 @@ jobs:
 #          sudo apt-get update
 #          sudo apt-get install -y google-chrome-stable=152.0.7977.64-1
 
+      - name: Uninstall Chrome 152
+        run: |
+          sudo apt-get remove -y google-chrome-stable
+          sudo apt-get autoremove -y
+          sudo rm -f /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+
       - name: Install Chrome 153
         run: |
           wget -q https://storage.googleapis.com/chrome-for-testing-public/153.0.8010.36/linux64/chrome-linux64.zip
