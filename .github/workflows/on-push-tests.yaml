@@ -2,7 +2,6 @@
 # --------------------------------
 # workflow name
 # trigger
-# steps ( the individual actions / steps
 # jobs (each job starts with any required setup for that job)
 # steps ( the individual actions that make up the job. Custom steps are started with a name.)
 
@@ -47,8 +46,11 @@ jobs:
         working-directory: webdriver_java
         run: mvn test
 
-      # Capture end timestamp regardless of test result. And compute test duration
-      - name: Record test end time
+      # Capture metrics regardless of test result.
+      - name: Record and collect test data
+        working-directory: webdriver_java
         if: always()
-        run: expr $(date +%s) - ${START_TIME}
+        run:  |
+          echo "TOTAL_DURATION=$(expr $(date +%s) - ${START_TIME})"
+          ./resources/test_result_script.sh
 
