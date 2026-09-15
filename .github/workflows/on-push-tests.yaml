@@ -45,6 +45,15 @@ jobs:
           sudo mv chrome-linux64 /opt/chrome
           sudo ln -sf /opt/chrome/chrome /usr/local/bin/google-chrome
           google-chrome --version
+          
+          # Download and extract matching ChromeDriver 153 to replace bundled version
+          wget -q https://storage.googleapis.com/chrome-for-testing-public/153.0.8010.36/linux64/chromedriver-linux64.zip
+          unzip -q chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver webdriver_java/resources/chromedriver-linux
+          sudo chmod +x webdriver_java/resources/chromedriver-linux
+    
+          google-chrome --version
+          webdriver_java/resources/chromedriver-linux --version
 
      # Capture test start time - I feel this gives a more accurate measure of the actual test run time
       - name: Record start time
