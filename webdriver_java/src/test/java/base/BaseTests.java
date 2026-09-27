@@ -59,6 +59,8 @@ public class BaseTests {
             var camera = (TakesScreenshot)driver;
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
             try{
+                File destination = new File("resources/screenshots/" + result.getName() + ".png");
+                Files.createParentDirs(destination);
                 Files.move(screenshot, new File("resources/screenshots/" + result.getName() + ".png"));
             }catch(IOException e){
                 e.printStackTrace();
