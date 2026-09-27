@@ -4,7 +4,8 @@ import com.google.common.io.Files;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+//import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.HomePage;
@@ -17,18 +18,27 @@ import java.io.IOException;
 
 public class BaseTests {
 
-    private EventFiringWebDriver driver;
+//    private EventFiringWebDriver driver;
+    private WebDriver driver;
     protected HomePage homePage;
+
+
+//    @BeforeClass
+//    public void setUp(){
+//        var driverExtention = "";
+//        if(System.getenv("RUNNER_OS") != null) {
+//            driverExtention = "-linux";
+//        };
+//        System.setProperty("webdriver.chrome.driver", "resources/chromedriver" + driverExtention);
+//        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+//        driver.register(new EventReporter());
+//    }
 
     @BeforeClass
     public void setUp(){
-        var driverExtention = "";
-        if(System.getenv("RUNNER_OS") != null) {
-            driverExtention = "-linux";
-        };
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver" + driverExtention);
-        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
-        driver.register(new EventReporter());
+//        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+//        driver.register(new EventReporter());
+        driver = new EventFiringDecorator<>(new EventReporter()).decorate(new ChromeDriver(getChromeOptions()));
     }
 
     @BeforeMethod
@@ -64,9 +74,14 @@ public class BaseTests {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
 
+//        var headless = Boolean.parseBoolean(System.getenv("HEADLESS_CHROME")) | false;
+//        options.setHeadless(headless);
+
         // Default headless mode off, set to true based on env var
-        var headless = Boolean.parseBoolean(System.getenv("HEADLESS_CHROME")) | false;
-        options.setHeadless(headless);
+        boolean headless = Boolean.parseBoolean(System.getenv("HEADLESS_CHROME"));
+        if(headless) {
+            options.addArguments("--headless");
+        }
         return options;
     }
 
