@@ -93,7 +93,7 @@ public class BaseTests {
     }
 
     private void logChrome() {
-        Capabilities capabilities = ((ChromeDriver) driver).getCapabilities();
+        Capabilities capabilities = ((HasCapabilities) driver).getCapabilities();
         System.out.println("Browser name: " + capabilities.getBrowserName());
         System.out.println("Browser version: " + capabilities.getBrowserVersion());
         System.out.println("Chrome driver version: " + capabilities.getCapability("chrome").toString());
