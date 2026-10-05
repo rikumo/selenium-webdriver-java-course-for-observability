@@ -15,15 +15,11 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
-    env:
+    env: # all variables set here get added to $GITHUB_ENV and are available to all steps in this job
       RUNNER_OS: true
       HEADLESS_CHROME: true
 
     steps:
-      # Capture build start time on linux
-#      - name: Record start time
-#        run: echo START_TIME=$(date +%s) >> $GITHUB_ENV
-
       - uses: actions/checkout@v2
 
       - uses: actions/setup-java@v2
