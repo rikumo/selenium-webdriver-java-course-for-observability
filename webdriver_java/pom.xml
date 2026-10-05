@@ -26,6 +26,12 @@
             <version>7.7.0</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v138</artifactId>
+            <version>4.35.0</version>
+        </dependency>
     </dependencies>
 
 <!--    <dependencies>-->
