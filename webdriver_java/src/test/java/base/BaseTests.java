@@ -39,6 +39,7 @@ public class BaseTests {
 //        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
 //        driver.register(new EventReporter());
         driver = new EventFiringDecorator<>(new EventReporter()).decorate(new ChromeDriver(getChromeOptions()));
+        logChrome();
     }
 
     @BeforeMethod
@@ -86,6 +87,13 @@ public class BaseTests {
             options.addArguments("--headless");
         }
         return options;
+    }
+
+    private void logChrome() {
+        Capabilities capabilities = ((ChromeDriver) driver).getCapabilities();
+        System.out.println("Browser name: " + capabilities.getBrowserName());
+        System.out.println("Browser version: " + capabilities.getBrowserVersion());
+        System.out.println("Chrome driver version: " + capabilities.getCapability("chrome").toString());
     }
 
     public CookieManager getCookieManager(){

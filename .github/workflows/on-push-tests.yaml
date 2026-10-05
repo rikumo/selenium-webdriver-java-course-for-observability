@@ -27,6 +27,27 @@ jobs:
           distribution: 'temurin'
           java-version: 16
 
+      - name: Show OS & Browser versiona
+        run: |
+          echo "==OS Version=="
+          uname -a
+          cat /etc/os-release
+          
+          echo "==Chrome Version=="
+          google-chrome --version
+          
+          echo "== Chrome Binaries"
+          which google-chrome
+          
+          echo "== ChromeDriver Version =="
+          chromedriver --version
+
+      - name: Install Chrome dependencies
+        run: |
+        sudo apt-get update
+        sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm1 libnss3 libxss1
+          
+
 #      - name: Install Chrome 153
 #        run: |
 #          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
