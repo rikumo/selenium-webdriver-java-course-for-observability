@@ -76,7 +76,7 @@ public class BaseTests {
     private ChromeOptions getChromeOptions(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
-        options.setBrowserVersion("153");
+        options.setBrowserVersion("154");
 //        options.addArguments("--headless=new");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
