@@ -77,6 +77,9 @@ public class BaseTests {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
         options.setBrowserVersion("153");
+//        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
 
 //        var headless = Boolean.parseBoolean(System.getenv("HEADLESS_CHROME")) | false;
 //        options.setHeadless(headless);
@@ -84,7 +87,7 @@ public class BaseTests {
         // Default headless mode off, set to true based on env var
         boolean headless = Boolean.parseBoolean(System.getenv("HEADLESS_CHROME"));
         if(headless) {
-            options.addArguments("--headless");
+            options.addArguments("--headless=new");
         }
         return options;
     }
