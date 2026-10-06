@@ -29,14 +29,14 @@ jobs:
 
       - name: Show OS & Browser versiona
         run: |
-          echo "==OS Version=="
+          echo "== OS Version =="
           uname -a
           cat /etc/os-release
           
-          echo "==Chrome Version=="
+          echo "== Chrome Version =="
           google-chrome --version
           
-          echo "== Chrome Binaries"
+          echo "== Chrome Binaries =="
           which google-chrome
           
           echo "== ChromeDriver Version =="
