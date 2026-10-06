@@ -14,7 +14,7 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env: # all variables set here get added to $GITHUB_ENV and are available to all steps in this job
       RUNNER_OS: true
       HEADLESS_CHROME: true
