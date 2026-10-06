@@ -14,7 +14,7 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env: # all variables set here get added to $GITHUB_ENV and are available to all steps in this job
       RUNNER_OS: true
       HEADLESS_CHROME: true
@@ -54,37 +54,25 @@ jobs:
             libgbm1 \
             libxshmfence1 \
             xvfb
+
+      - name: Install Chrome 154 and ChromeDriver 154
+        run: |
+            # Download Chrome 154
+            wget -q https://storage.googleapis.com/chrome-for-testing-public/154.0.8037.57/linux64/chrome-linux64.zip
+            unzip -q chrome-linux64.zip
+            sudo mv chrome-linux64 /opt/chrome
+            sudo ln -sf /opt/chrome/chrome /usr/local/bin/google-chrome
+            
+            # Download and extract matching ChromeDriver 154
+            wget -q https://storage.googleapis.com/chrome-for-testing-public/154.0.8037.92/linux64/chromedriver-linux64.zip
+            unzip -q chromedriver-linux64.zip
+            sudo mv chromedriver-linux64/chromedriver webdriver_java/resources/chromedriver-linux
+            sudo chmod +x webdriver_java/resources/chromedriver-linux
+            
+            # Verify versions
+            google-chrome --version
+            webdriver_java/resources/chromedriver-linux --version      
           
-
-#      - name: Install Chrome 153
-#        run: |
-#          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-#          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-#          sudo apt-get update
-#          sudo apt-get install -y google-chrome-stable=152.0.7977.64-1
-#
-#      - name: Uninstall Chrome 152
-#        run: |
-#          sudo apt-get remove -y google-chrome-stable
-#          sudo apt-get autoremove -y
-#          sudo rm -f /etc/apt/sources.list.d/google-chrome.list
-#          sudo apt-get update
-
-#      - name: Install Chrome 153
-#        run: |
-#          wget -q https://storage.googleapis.com/chrome-for-testing-public/153.0.8010.36/linux64/chrome-linux64.zip
-#          unzip -q chrome-linux64.zip
-#          sudo mv chrome-linux64 /opt/chrome
-#          sudo ln -sf /opt/chrome/chrome /usr/local/bin/google-chrome
-#
-#          # Download and extract matching ChromeDriver 153 to replace bundled version
-#          wget -q https://storage.googleapis.com/chrome-for-testing-public/153.0.8010.36/linux64/chromedriver-linux64.zip
-#          unzip -q chromedriver-linux64.zip
-#          sudo mv chromedriver-linux64/chromedriver webdriver_java/resources/chromedriver-linux
-#          sudo chmod +x webdriver_java/resources/chromedriver-linux
-#
-#          google-chrome --version
-#          webdriver_java/resources/chromedriver-linux --version
 
      # Capture test start time - I feel this gives a more accurate measure of the actual test run time
       - name: Record start time
