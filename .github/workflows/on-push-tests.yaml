@@ -76,7 +76,7 @@ jobs:
 
      # Capture test start time - I feel this gives a more accurate measure of the actual test run time
       - name: Record start time
-        run: echo START_TIME=$(date +%s) >> $GITHUB_ENV
+        run: echo START_TIME=$(date +%s) | tee -a $GITHUB_ENV
 
       - name: Run selenium tests with maven
         working-directory: webdriver_java
